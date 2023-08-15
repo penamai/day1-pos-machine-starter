@@ -26,4 +26,8 @@ public class PosMachine {
     private int getItemPrice(String barcode, List<Item> items){
         return Objects.requireNonNull(items.stream().filter(item -> barcode.equals(item.getBarcode())).findAny().orElse(null)).getPrice();
     }
+
+    private int getSubtotal(int quantity, int price){
+        return quantity*price;
+    }
 }
