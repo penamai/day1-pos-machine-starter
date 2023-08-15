@@ -22,4 +22,8 @@ public class PosMachine {
     private String getItemName(String barcode, List<Item>items){
         return Objects.requireNonNull(items.stream().filter(item -> barcode.equals(item.getBarcode())).findAny().orElse(null)).getName();
     }
+
+    private int getItemPrice(String barcode, List<Item> items){
+        return Objects.requireNonNull(items.stream().filter(item -> barcode.equals(item.getBarcode())).findAny().orElse(null)).getPrice();
+    }
 }
