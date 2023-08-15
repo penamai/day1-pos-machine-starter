@@ -1,9 +1,6 @@
 package pos.machine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PosMachine {
@@ -20,5 +17,9 @@ public class PosMachine {
         uniqueBarcodes.forEach(barcode-> quantity.put(barcode, Collections.frequency(barcodes, barcode)));
 
         return quantity;
+    }
+
+    private String getItemName(String barcode, List<Item>items){
+        return Objects.requireNonNull(items.stream().filter(item -> barcode.equals(item.getBarcode())).findAny().orElse(null)).getName();
     }
 }
