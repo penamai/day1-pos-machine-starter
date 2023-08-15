@@ -5,7 +5,13 @@ import java.util.stream.Collectors;
 
 public class PosMachine {
     public String printReceipt(List<String> barcodes) {
-        return null;
+        ItemsLoader itemsLoader = new ItemsLoader();
+
+        List<Item> items = ItemsLoader.loadAllItems();
+        List<String> uniqueBarcodes = filterUniqueBarcodes(barcodes);
+        HashMap<String, Integer> quantity = countEachItem(barcodes, uniqueBarcodes);
+
+        return generateReceipt(uniqueBarcodes, quantity, items);
     }
 
     private List<String> filterUniqueBarcodes(List<String> barcodes){
@@ -21,8 +27,7 @@ public class PosMachine {
 
     private String generateReceipt(List<String> uniqueBarcodes, HashMap<String, Integer> quantity, List<Item> items) {
         StringBuilder output = new StringBuilder("***<store earning no money>Receipt***\n");
-        for (int index = 0; index < uniqueBarcodes.size(); index++) {
-            String barcode = uniqueBarcodes.get(index);
+        for (String barcode : uniqueBarcodes) {
             String itemName = getItemName(barcode, items);
             int itemQuantity = quantity.get(barcode);
             int itemPrice = getItemPrice(barcode, items);
