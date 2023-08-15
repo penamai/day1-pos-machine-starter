@@ -30,4 +30,8 @@ public class PosMachine {
     private int getSubtotal(int quantity, int price){
         return quantity*price;
     }
+
+    private String generateOneItem(String name, int quantity, int price, int subtotal){
+        return "Name: " + name + ", Quantity: " + quantity + ", Unit price: " + price + " (yuan), Subtotal: " + subtotal + " (yuan)\n";
+    }
 }
