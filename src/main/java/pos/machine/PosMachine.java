@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class PosMachine {
     public String printReceipt(List<String> barcodes) {
+        //TODO: this can be remove since it is not used anymore
         ItemsLoader itemsLoader = new ItemsLoader();
 
         List<Item> items = ItemsLoader.loadAllItems();
@@ -27,6 +28,7 @@ public class PosMachine {
 
     private String generateReceipt(List<String> uniqueBarcodes, HashMap<String, Integer> quantity, List<Item> items) {
         StringBuilder output = new StringBuilder("***<store earning no money>Receipt***\n");
+        //TODO: should convert this into Stream to shorten and make it simpler
         for (String barcode : uniqueBarcodes) {
             String itemName = getItemName(barcode, items);
             int itemQuantity = quantity.get(barcode);
@@ -39,6 +41,7 @@ public class PosMachine {
         return output.toString();
     }
 
+    //TODO: can place these functions into a new Object class to achieve single responsibility
     private String getItemName(String barcode, List<Item>items){
         return Objects.requireNonNull(items.stream().filter(item -> barcode.equals(item.getBarcode())).findAny().orElse(null)).getName();
     }
@@ -46,7 +49,6 @@ public class PosMachine {
     private int getItemPrice(String barcode, List<Item> items){
         return Objects.requireNonNull(items.stream().filter(item -> barcode.equals(item.getBarcode())).findAny().orElse(null)).getPrice();
     }
-
     private int getSubtotal(int quantity, int price){
         return quantity*price;
     }
